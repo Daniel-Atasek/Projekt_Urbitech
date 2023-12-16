@@ -1,0 +1,15 @@
+
+  <div class="card m-2" style="width: 20rem; height: 33rem; ">
+  <div class="card-body">
+    <h2 class="card-title font-weight-bold">{$record->book_name}</h2>
+    <h4 class="card-subtitle p-2 text-secondary"><a href="/{$record->author_name}_{$record->surname}">{$record->author_name} {$record->surname}</a></h4>
+    <p class="card-text text-left" style="height: 8rem;">{$record->description}</p>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">Published: {$record->year}</li>
+     <li class="list-group-item">Pages: {$record->pages}</li>
+    </ul>
+    <a href="#" class="btn btn-outline-info">Go to book info</a>
+  </div>
+</div>
+
+ 
