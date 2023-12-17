@@ -35,75 +35,32 @@ final class Template1533db0b04 extends Latte\Runtime\Template
 
     </header>
    <!--- Book modal ---->
-
-    <div class="modal" id="booksForms" tabindex="-1">
-      <div class="modal-dialog"> 
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="modal-title">Add a new book...</h2>
-          </div>
-          <div class="modal-body">
-            <form>
-            <div class="mb-1">
+   
 ';
-		$ʟ_tmp = $this->global->uiControl->getComponent('bookForm');
-		if ($ʟ_tmp instanceof Nette\Application\UI\Renderable) $ʟ_tmp->redrawControl(null, false);
-		$ʟ_tmp->render() /* line 27 */;
-
-		echo '            </div>
-            
-          
-            </form>
-          </div>
-          <div class="modal-footer">
-          <button>Add</button>
-          <button>Clear</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
+		$this->createTemplate('bookmodal.latte', $this->params, 'include')->renderToContentType('html') /* line 18 */;
+		echo '
     <!--- end of Book modal ---->
      <!--- Author modal ---->
 
-    <div class="modal" id="authorForms" tabindex="-1">
-      <div class="modal-dialog"> 
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="modal-title">Add or change author...</h2>
-          </div>
-          <div class="modal-body">
-            <form>
-            <div class="mb-1">
 ';
-		$ʟ_tmp = $this->global->uiControl->getComponent('authorForm');
-		if ($ʟ_tmp instanceof Nette\Application\UI\Renderable) $ʟ_tmp->redrawControl(null, false);
-		$ʟ_tmp->render() /* line 53 */;
-
-		echo '            </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-          <button>Add</button>
-          <button>Clear</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
+		$this->createTemplate('authormodal.latte', $this->params, 'include')->renderToContentType('html') /* line 23 */;
+		echo '
     <!--- end of Author modal ---->
+
+ 
   <main>
     
     <ul class="list-inline text-center bg-secondary">
       <li class="list-inline-item btn btn-info" data-toggle="modal" data-target="#booksForms">Add/Update book</li>    
-      <li class="list-inline-item btn btn-info" data-toggle="modal" data-target="#authorForms">Add/Update author</li>   
+      <li class="list-inline-item btn btn-info" data-toggle="modal" data-target="#authorForms">Add/Update author</li> 
+      
     </ul>
   <div class="container text-center">
     <div class="row align-items-start">
 ';
-		foreach ($records as $record) /* line 74 */ {
+		foreach ($records as $record) /* line 37 */ {
 			echo '      <div class="col">';
-			$this->createTemplate('card.latte', ['record' => $record] + $this->params, 'include')->renderToContentType('html') /* line 75 */;
+			$this->createTemplate('card.latte', ['record' => $record] + $this->params, 'include')->renderToContentType('html') /* line 38 */;
 			echo '</div>
 ';
 
@@ -116,10 +73,19 @@ final class Template1533db0b04 extends Latte\Runtime\Template
   </main>
 
 <footer class="d-flex justify-content-center">
-<button>1</button>
-<button>2</button>
-<button>-></button>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link text-dark" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
+    <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
+    <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
+    <li class="page-item"><a class="page-link text-dark" href="#">Next</a></li>
+  </ul>
+</nav>
 </footer>
+
+   
+
   	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -133,7 +99,7 @@ final class Template1533db0b04 extends Latte\Runtime\Template
 		extract($this->params);
 
 		if (!$this->getReferringTemplate() || $this->getReferenceType() === 'extends') {
-			foreach (array_intersect_key(['record' => '74'], $this->params) as $ʟ_v => $ʟ_l) {
+			foreach (array_intersect_key(['record' => '37'], $this->params) as $ʟ_v => $ʟ_l) {
 				trigger_error("Variable \$$ʟ_v overwritten in foreach on line $ʟ_l");
 			}
 		}

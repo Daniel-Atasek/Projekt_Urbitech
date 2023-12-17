@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Presenters;
 
+use App\Forms\AuthorForm;
+use App\Forms\BookForm;
+use App\Forms\SearchForm;
 use App\Model\MainRepository;
 use Nette;
 use Nette\Application\UI\Form;
@@ -25,9 +28,7 @@ final class HomePresenter extends Nette\Application\UI\Presenter
       }
       $this->template->records = $records;
    }
-   public function handleIncreaseCount(){
-
-   }
+   
 
 
 
@@ -35,41 +36,46 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 
 
 
-
-
-
-   protected function createComponentBookForm():Form
+   //search function, not working yet
+   /*protected function createComponentSearchForm():SearchForm
    {
-    
+      $form = new SearchForm();
+      $form->onDataSubmitted[] = [$this, 'formSucceededSearch']; 
+      return $form;
+   }
+   public function formSucceededSearch(Form $form, $data){
+      $databaseResult = $this->mainRepository->search($data['option'], $data['searchParameters']);
+      $records = $databaseResult;
       
+      foreach($records as &$record){
+         $record['description'] = mb_strimwidth($record['description'], 0, 100) . '...';
+      }
+      $this->template->records = $records;
+   }*/
 
-      $form = new Form;
+   protected function createComponentBookForm():BookForm
+   {
+      $form = new BookForm($this->mainRepository->findAuthors(), $this->mainRepository->findBooks());
+      $form->onDataSubmitted[] = [$this, 'formSucceededBook']; 
       
-      $form->addText('name', 'Title');
-      $form->addText('description', 'Description');
-      $form->addInteger('year', 'Published in');
-      $form->addInteger('pages', 'Amount of pages');
-      $form->addSelect('author', 'Select an author', $this->mainRepository->findAuthors());
-      $form->addSubmit('add', 'Add into database');
-      $form->onSuccess[] = [$this, 'formSucceededBook'];
       return $form;
    }
    public function formSucceededBook(Form $form, $data){
-      $this->flashMessage('User would have been added');
-      $this->redirect('Home:');
+      $this->mainRepository->saveBook($data);
    }
-   protected function createComponentAuthorForm():Form
+   public function handleBookButtonClick(BookForm $form): void
+    {
+        
+        $form->yourFunctionInsideForm();
+    }
+   protected function createComponentAuthorForm():AuthorForm
    {
-      $form = new Form;
-      $form->addText('name', 'Name');
-      $form->addText('surname', 'Surname');
-      $form->addSubmit('add', 'Add into database');
-      $form->onSuccess[] = [$this, 'formSucceededAuthor'];
+      $form = new AuthorForm();
+      $form->onDataSubmitted[] = [$this, 'formSucceededAuthor'];
       return $form;
    }
    public function formSucceededAuthor(Form $form, $data){
-      $this->flashMessage('User would have been added');
-      $this->redirect('Home:');
+      $this->mainRepository->saveAuthor($data); 
    }
 
 }
