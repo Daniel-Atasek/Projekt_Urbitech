@@ -14,7 +14,7 @@ class MainService
     {
         return $this->mainRepository->findBooks();
     }
-    public function findAuthors(): array{
+    public function findAuthors(){
         return $this->mainRepository->findAuthors();
 
     }
