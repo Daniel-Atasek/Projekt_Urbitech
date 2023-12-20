@@ -18,7 +18,7 @@ Projekt na základě PDF požadavků
 - Klonovat projekt z githubu do htdocs(Nejlepe si udelat slozku a klonovat do ni, v mem pripade to je slozka "Projekt" takze local url je pote http://localhost:8082/Projekt/www/home)
 - Spusteni xampp (apache)
 - Zadani http://localhost:8082/Projekt/www/home do prohlizece
-- Update funguje na bazi horniho select boxu, update->none znamena ze se zaznam prida, pokud se vybere primo nejaky autor nebo kniha, tak jsme v update casti kodu. To znamena ze jakekoliv pole kam neco napiseme, tak se zmeni v to co mame v danem text boxu, priklad:
+- Update funguje na bazi horniho select boxu, update->none znamena ze se zaznam prida, pokud se vybere primo nejaky autor nebo kniha, tak jsme v update casti kodu. To znamena ze jakekoliv pole kam neco napiseme, tak se zmeni v to co mame v danem text boxu (krome autora, ten se musi nastavit vzdy), priklad:
   Name (nechame prazdne) Surname zmenime, tak se nam pouze zmeni Surname autora, Name zustane nedotcene.
 - Funkce na kterych jsem pracoval ale nestihnul skrz komplikace byli Search a pagging.
 - Dekuji za vas cas a preji hezky zbytek dne
