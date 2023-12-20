@@ -29,8 +29,8 @@ class MainRepository extends Explorer{
     {
         $findBooks ='SELECT a.name AS author_name, a.surname, b.name AS book_name, b.description, b.id, b.year, b.pages FROM
          authors AS a JOIN books AS b ON b.id_author = a.id ORDER BY b.name;';
-        $records = $this->query($findBooks)->fetchAll();
-        return $records;
+        return $records = $this->query($findBooks)->fetchAll();
+        
     }
 
     public function findBookById($bookId){
