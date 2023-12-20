@@ -11,6 +11,8 @@ Projekt na základě PDF požadavků
 - Mysql Database
 
 ## Setup
+ <Testováno na Windows Sandbox>
+ 
 - Instalace Xampp převážně kvůli Apache serveru a configu, verze 8.0.30. config-service and ports-Apache main port 8082
 - Instalace MySQL Workbench a MySQL server, skrz konfigurátor si nastavíme jen heslo (důležité později do local.neon) v mém případě to bylo "Projekt2012", dále jsem nechal standard system account, grant full acces a bez sample databáze
 - Poté si naklonujeme Projekt z github a vytvoříme si složku uvnitř xampp/htdocs s názvem Projekt, do které vložíme obsah z repository (Ne slozku Projekt_Urbitech... ale její soubory) a uvnitř našeho xampp/htdocs/Projekt ještě vytvoříme log složku
