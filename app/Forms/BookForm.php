@@ -18,12 +18,18 @@ class BookForm extends Form
     foreach($books as $book){
         $booksFormatted[$book['id']] = $book['book_name'] . ' ' . $book['year'] . ' ' . $book['author_name'] . ' ' . $book['surname'];
     }
-    $this->addSelect('books', 'Update a book', $booksFormatted)->setHtmlAttribute('style', 'max-width: 160px;');
+    $options = [];
+        foreach($authors as $author){
+            $fullName = $author['name']. ' ' . $author['surname'];
+            $options [$author->id] = $fullName;
+        }
+    
+    $this->addSelect('bookId', 'Update a book', $booksFormatted)->setHtmlAttribute('style', 'max-width: 160px;');
     $this->addText('name', 'Title')->setRequired('Please fill in name.');
     $this->addText('description', 'Description')->setRequired('Please fill in description.');
     $this->addInteger('year', 'Published in')->setRequired('Please fill in year.');
     $this->addInteger('pages', 'Amount of pages')->setRequired('Please fill in pages.');
-    $this->addSelect('author', 'Select an author', $authors);
+    $this->addSelect('id_author', 'Select an author', $options);
     $this->addSubmit('add', 'Add/Update');
     $this->onSuccess[] = [$this, 'processForm'];
     }

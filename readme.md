@@ -1,26 +1,20 @@
-Nette Web Project
-=================
+# Nette Web Project
 
 Projekt na základě PDF požadavků
 
-
-Requirements
-------------
+## Requirements
 
 - PHP 8.0
 - Composer
 - Nette Sandbox
-- Apache server
+- Apache server (xampp)
 - Mysql Database
 
-Installation
-------------
+## Installation
 
 ---
 
-
-Web Server Setup
-----------------
+## Web Server Setup
 
 ---
 

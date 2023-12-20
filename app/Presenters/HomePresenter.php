@@ -6,21 +6,24 @@ namespace App\Presenters;
 
 use App\Forms\AuthorForm;
 use App\Forms\BookForm;
-use App\Forms\SearchForm;
-use App\Model\MainRepository;
+//use App\Model\MainRepository;
+use App\Model\MainService;
 use Nette;
 use Nette\Application\UI\Form;
-use Nette\ComponentModel\IComponent;
+
 
 final class HomePresenter extends Nette\Application\UI\Presenter
 {
    /** @var MainRepository @inject */
-   public $mainRepository;
+  // public $mainRepository;
+
+   /** @var MainService @inject */
+   public $mainService;
 
    public function renderDefault(){
       
       
-      $databaseResult = $this->mainRepository->findAuthorsWithBooks();
+      $databaseResult = $this->mainService->findAuthorsWithBooks();
       $records = $databaseResult;
       
       foreach($records as &$record){
@@ -28,14 +31,6 @@ final class HomePresenter extends Nette\Application\UI\Presenter
       }
       $this->template->records = $records;
    }
-   
-
-
-
-
-
-
-
    //search function, not working yet
    /*protected function createComponentSearchForm():SearchForm
    {
@@ -53,29 +48,29 @@ final class HomePresenter extends Nette\Application\UI\Presenter
       $this->template->records = $records;
    }*/
 
-   protected function createComponentBookForm():BookForm
+   public function createComponentBookForm():BookForm
    {
-      $form = new BookForm($this->mainRepository->findAuthors(), $this->mainRepository->findBooks());
+      $form = new BookForm($this->mainService->findAuthors(), $this->mainService->findBooks());
       $form->onDataSubmitted[] = [$this, 'formSucceededBook']; 
       
       return $form;
    }
    public function formSucceededBook(Form $form, $data){
-      $this->mainRepository->saveBook($data);
+      $this->mainService->processBook($data);
    }
    public function handleBookButtonClick(BookForm $form): void
     {
         
         $form->yourFunctionInsideForm();
     }
-   protected function createComponentAuthorForm():AuthorForm
+   public function createComponentAuthorForm():AuthorForm
    {
-      $form = new AuthorForm();
+      $form = new AuthorForm($this->mainService->findAuthors());
       $form->onDataSubmitted[] = [$this, 'formSucceededAuthor'];
       return $form;
    }
    public function formSucceededAuthor(Form $form, $data){
-      $this->mainRepository->saveAuthor($data); 
+      $this->mainService->ProcessAuthor($data); 
    }
 
 }

@@ -8,7 +8,7 @@ class MainRepository extends Explorer{
    
     public function findAuthorsWithBooks()
     {
-        $findAuthorsWithBooks ='Select a.name AS author_name, a.surname, b.name AS book_name, b.description, b.year, b.pages FROM
+        $findAuthorsWithBooks ='SELECT a.name AS author_name, a.surname, b.name AS book_name, b.description, b.year, b.pages FROM
          authors AS a JOIN books AS b ON b.id_author = a.id LIMIT 9;';
 
         return $records = $this->query($findAuthorsWithBooks)->fetchAll();
@@ -22,65 +22,69 @@ class MainRepository extends Explorer{
         )
         ORDER BY surname, name, id;';
 
-        $records = $this->query($findAuthors)->fetchAll();
-        $options = [];
-        foreach($records as $record){
-            $fullName = $record['name']. ' ' . $record['surname'];
-            $options [$record->id] = $fullName;
-        }
-        return $options;
+        return $records = $this->query($findAuthors)->fetchAll();
+        
     }
     public function findBooks()
     {
-        $findBooks ='Select a.name AS author_name, a.surname, b.name AS book_name, b.description, b.id, b.year, b.pages FROM
+        $findBooks ='SELECT a.name AS author_name, a.surname, b.name AS book_name, b.description, b.id, b.year, b.pages FROM
          authors AS a JOIN books AS b ON b.id_author = a.id ORDER BY b.name;';
-        
         $records = $this->query($findBooks)->fetchAll();
-        /*$books = [];
-        foreach($records as $record){
-            $bookInfo = $record['book_name'] . ' ' . $record['b.year'] . ' ' . $record['author_name']. ' ' . $record['surname'];
-            $books [$record->id] = $bookInfo;
-        }*/
         return $records;
     }
 
-    public function saveAuthor($data){
-        $randomId = $this->query("SELECT count(*) from authors")->fetchField();
+    public function findBookById($bookId){
+        $bookRecord = $this->query("SELECT  b.id_author, b.name, b.description, b.year, b.pages FROM
+        authors AS a JOIN books AS b ON b.id_author = a.id WHERE b.id = $bookId ORDER BY b.name;")->fetch();
 
-        $randomId += 1;
-
-        $this->query('INSERT INTO authors (id, name, surname) VALUES (?,?,?)', $randomId, $data['name'],$data['surname'] );
-        
-        echo "Author inserted succefully";
+        return $bookRecord;
     }
-    public function saveBook($data){
-        $randomId = $this->query("SELECT count(*) from books")->fetchField();
-        $randomId += 1;
+    public function findAuthorById($authorId){
+        return $this->query("SELECT name, surname FROM authors WHERE id = ?;", $authorId)->fetch();
 
-        $bookId = $data['books'];
-        echo "book id: " . $bookId;
-        if($bookId < 1){
-            $this->query('INSERT INTO books (id ,id_author, name, description, year, pages) VALUES (?, ?, ?, ?, ?, ?)',
-            $randomId,
-            $data['author'],
-            $data['name'],
-            $data['description'],
-            $data['year'],
-            $data['pages']
-                );
-            echo "Book inserted succefully";
-        }
-        else
-        {
-            echo "to update";
-        }
-        
+         
+    }
+
+    public function saveBook($data){
+        $maxID = $this->query("SELECT MAX(id) from books")->fetchField();
+        $maxID += 1;
+        //fill in values instead of ?
+        $this->query('INSERT INTO books (id ,id_author, name, description, year, pages) VALUES (?, ?, ?, ?, ?, ?)',
+        $maxID,
+        $data['id_author'],
+        $data['name'],
+        $data['description'],
+        $data['year'],
+        $data['pages']);
+    }
+    public function updateBook($bookRecord, $bookId){
+
+        $this->query("UPDATE books SET id_author = ?, name = ?, description = ?, year = ?, pages = ?  WHERE id = ?", 
+        $bookRecord['id_author'],
+        $bookRecord['name'], 
+        $bookRecord['description'],
+        $bookRecord['year'],
+        $bookRecord['pages'],
+        $bookId);
+    }
+    public function saveAuthor($data){
+        $maxID = $this->query("SELECT MAX(id) from authors")->fetchField();
+        $maxID += 1;
+
+        $this->query('INSERT INTO authors (id, name, surname) VALUES (?,?,?)', $maxID, $data['name'],$data['surname'] );
+            echo "Author inserted succefully";
+    }
+    public function updateAuthor($authorRecord, $authorId){
+        $this->query("UPDATE authors SET  name = ?, surname = ?  WHERE id = ?", 
+            $authorRecord['name'],
+            $authorRecord['surname'], 
+            $authorId);
     }
 
   /*  public function search($option, $query)
     {
-        echo"option is" . " " . $option;
-        echo"query is" . " " . $query;
+        echo"option is " . $option;
+        echo"query is " . $query;
         switch($option){
            
             case "book":

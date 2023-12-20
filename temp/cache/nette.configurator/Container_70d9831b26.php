@@ -70,6 +70,7 @@ class Container_70d9831b26 extends Nette\DI\Container
 		'Traversable' => [2 => ['01']],
 		'Nette\Application\Routers\RouteList' => [['01']],
 		'App\Model\MainRepository' => [['02']],
+		'App\Model\MainService' => [['03']],
 		'Nette\Application\UI\Presenter' => [2 => ['application.1', 'application.3']],
 		'Nette\Application\UI\Control' => [2 => ['application.1', 'application.3']],
 		'Nette\Application\UI\Component' => [2 => ['application.1', 'application.3']],
@@ -114,6 +115,12 @@ class Container_70d9831b26 extends Nette\DI\Container
 	}
 
 
+	public function createService03(): App\Model\MainService
+	{
+		return new App\Model\MainService($this->getService('02'));
+	}
+
+
 	public function createServiceApplication__1(): App\Presenters\Error4xxPresenter
 	{
 		$service = new App\Presenters\Error4xxPresenter;
@@ -151,7 +158,7 @@ class Container_70d9831b26 extends Nette\DI\Container
 			$this->getService('security.user'),
 			$this->getService('latte.templateFactory'),
 		);
-		$service->mainRepository = $this->getService('02');
+		$service->mainService = $this->getService('03');
 		$service->invalidLinkMode = 5;
 		return $service;
 	}

@@ -18,7 +18,8 @@ final class RouterFactory
 		
 		$router->addRoute('<presenter>/<action>', 'Home:default');
 
-		$router->addRoute('Home', 'Home:default');
+		
+		
 		
 		return $router;
 	}
