@@ -12,7 +12,7 @@ Projekt na základě PDF požadavků
 
 ## Setup
 
-- Instalace MySQL client (default port)
+- Instalace MySQL server  a Mysql Workbench (default port, zakladni root uzivatel, plna prava)
 - instalace Xampp (Apache port 8082, Manage servers->Apache web server->configure->Port = 8082)
 - Nahrani mysql souboru do databaze
 - Klonovat projekt z githubu do htdocs(Nejlepe si udelat slozku a klonovat do ni, v mem pripade to je slozka "Projekt" takze local url je pote http://localhost:8082/Projekt/www/home)
