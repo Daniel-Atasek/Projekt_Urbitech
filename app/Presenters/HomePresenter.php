@@ -14,8 +14,7 @@ use Nette\Application\UI\Form;
 
 final class HomePresenter extends Nette\Application\UI\Presenter
 {
-   /** @var MainRepository @inject */
-  // public $mainRepository;
+   
 
    /** @var MainService @inject */
    public $mainService;

@@ -83,6 +83,9 @@ class MainRepository extends Explorer{
 
   /*  public function search($option, $query)
     {
+
+        ## imlement in service->repository
+        
         echo"option is " . $option;
         echo"query is " . $query;
         switch($option){
