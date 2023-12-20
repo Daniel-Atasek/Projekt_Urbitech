@@ -80,34 +80,6 @@ class MainRepository extends Explorer{
             $authorRecord['surname'], 
             $authorId);
     }
-
-  /*  public function search($option, $query)
-    {
-
-        ## imlement in service->repository
-        
-        echo"option is " . $option;
-        echo"query is " . $query;
-        switch($option){
-           
-            case "book":
-                $results = $this->query('Select a.name AS author_name, a.surname, b.name AS book_name, b.description, b.year, b.pages FROM
-                authors AS a JOIN books AS b ON b.id_author = a.id WHERE b.name LIKE ? LIMIT 9;', "%$query%")->fetchAll();
-                echo "returning book";
-                return $results;
-            
-                
-            case "author":
-                $results = $this->query('Select a.name AS author_name, a.surname, b.name AS book_name, b.description, b.year, b.pages FROM
-                authors AS a JOIN books AS b ON b.id_author = a.id WHERE a.name LIKE ? or a.surname LIKE ? LIMIT 9;', "%$query%", "%$query%")->fetchAll();
-                echo "returning author";
-                return $results;
-                
-        }
-       
-        
-    }
-   */
     
 }
 ?>
