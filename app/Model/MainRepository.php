@@ -13,7 +13,7 @@ class MainRepository extends Explorer{
 
         return $records = $this->query($findAuthorsWithBooks)->fetchAll();
     }
-    public function findAuthors(): array{
+    public function findAuthors(){
         $findAuthors='SELECT id, name, surname
         FROM authors WHERE (name, surname, id) IN (
             SELECT DISTINCT name, surname, MIN(id) AS id
