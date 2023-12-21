@@ -26,7 +26,7 @@ Projekt na základě PDF požadavků
 
 ## Info
 - Update funguje na bázi horního select boxu, update->none znamená že se záznam přidá. Pokud se vybere přímo nějaký autor nebo kniha, tak jsme v update části kodu (práce MainService). To znamená že jakékoliv pole kam něco napíšeme, tak se změní v to, co máme v dánem text boxu (kromě autora, ten se musí nastavit vždy), příklad:
-  Name (ponecháme prázdné) Surname změníme, tak se nám pouze zmení Surname autora, Name zůstane nedotčené. Musel jsem použít tuto metodu, jelikož jsem spoustu času využil s prací AJAX který mě nefungoval. 
+  Name (ponecháme prázdné) Surname změníme, tak se nám pouze zmení Surname autora, Name zůstane nedotčené. Musel jsem použít tuto metodu, jelikož jsem spoustu času využil s prací AJAX který mě nefungoval. Bohužel jsem zapomněl přidat redirect takže aby uživatel uviděl výsledek musi znovu zadat url stránky.
 - Funkce na kterých jsem pracoval ale nestihnul skrz komplikace byli Search a pagging.
 - Dekuji za váš čas a přeji hezký zbytek dne. Atásek.
 
